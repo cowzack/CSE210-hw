@@ -1,48 +1,34 @@
 using System;
-using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
-        // Create videos
-        Video video1 = new Video("C# Basics Tutorial", "John Doe", 600);
-        Video video2 = new Video("OOP Explained", "Jane Smith", 800);
-        Video video3 = new Video("How to Code Faster", "CodeMaster", 500);
+        Address address1 = new Address("123 Mabini St", "Manila", "NCR", "Philippines");
+        Address address2 = new Address("456 Bonifacio Blvd", "Cebu City", "Cebu", "Philippines");
 
-        // Add comments to video 1
-        video1.AddComment(new Comment("Alice", "Great video!"));
-        video1.AddComment(new Comment("Bob", "Very helpful."));
-        video1.AddComment(new Comment("Charlie", "Thanks for this!"));
+        Customer customer1 = new Customer("Juan Dela Cruz", address1);
+        Customer customer2 = new Customer("Maria Santos", address2);
 
-        // Add comments to video 2
-        video2.AddComment(new Comment("Dave", "I finally understand OOP."));
-        video2.AddComment(new Comment("Eve", "Nice explanation!"));
-        video2.AddComment(new Comment("Frank", "Can you make more videos?"));
+        Product product1 = new Product("Laptop", "LP1001", 50000, 1);
+        Product product2 = new Product("Mouse", "MS2002", 1500, 2);
+        Product product3 = new Product("Keyboard", "KB3003", 2500, 1);
+        Product product4 = new Product("Monitor", "MN4004", 12000, 2);
 
-        // Add comments to video 3
-        video3.AddComment(new Comment("Grace", "Awesome tips!"));
-        video3.AddComment(new Comment("Hank", "This helped me a lot."));
-        video3.AddComment(new Comment("Ivy", "Short and useful!"));
+        Order order1 = new Order(customer1);
+        order1.AddProduct(product1);
+        order1.AddProduct(product2);
 
-        // Store videos in a list
-        List<Video> videos = new List<Video> { video1, video2, video3 };
+        Order order2 = new Order(customer2);
+        order2.AddProduct(product3);
+        order2.AddProduct(product4);
 
-        // Display all videos and comments
-        foreach (Video video in videos)
-        {
-            Console.WriteLine($"Title: {video.Title}");
-            Console.WriteLine($"Author: {video.Author}");
-            Console.WriteLine($"Length: {video.Length} seconds");
-            Console.WriteLine($"Number of Comments: {video.GetCommentCount()}");
+        Console.WriteLine(order1.GetPackingLabel());
+        Console.WriteLine(order1.GetShippingLabel());
+        Console.WriteLine($"Total Price: ₱{order1.CalculateTotal():0.00}\n");
 
-            Console.WriteLine("Comments:");
-            foreach (Comment comment in video.GetComments())
-            {
-                Console.WriteLine($"- {comment.Author}: {comment.Text}");
-            }
-
-            Console.WriteLine(); // blank line between videos
-        }
+        Console.WriteLine(order2.GetPackingLabel());
+        Console.WriteLine(order2.GetShippingLabel());
+        Console.WriteLine($"Total Price: ₱{order2.CalculateTotal():0.00}\n");
     }
 }
